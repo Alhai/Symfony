@@ -17,25 +17,23 @@ class MessageController extends AbstractController
     #[Route('/message', name: 'message')]
     public function index(
         MessageRepository $repository
-    ): Response
-    {
+    ): Response {
         $messages = $repository->findAll();
-        return $this->render('pages/message/index.html.twig',[
+        return $this->render('pages/message/index.html.twig', [
             'messages' => $messages
             // 'controller_name' => 'MessageController',
         ]);
     }
 
-    #[Route('/message/nouveau', 'message.new', methods:['GET', 'POST'])]
+    #[Route('/message/nouveau', 'message.new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
         EntityManagerInterface $manager
-    ) : Response 
-    {
+    ): Response {
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $message = $form->getData();
             $manager->persist($message);
             $manager->flush();
@@ -48,11 +46,24 @@ class MessageController extends AbstractController
 
         ]);
     }
-    #[Route('/message/edition/{id}', 'message.edit', methods:['GET', 'POST'])]
-    public function edit(MessageRepository $repository, int $id) : Response
-    {
-        $message = $repository->findOneBy(["id" => $id]);
+    #[Route('/message/update/{id}', 'message.edit', methods: ['GET', 'POST'])]
+    public function edit(
+        Message $message,
+        Request $request,
+        EntityManagerInterface $manager
+    ): Response {
         $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $message = $form->getData();
+
+            $manager->persist($message);
+            $manager->flush();
+
+            return $this->redirectToRoute('message');
+        }
+        // $form = $this->createForm(MessageType::class, $message);
+
         return $this->render('pages/message/edit.html.twig', [
             'form' => $form->createView()
         ]);
