@@ -62,10 +62,21 @@ class MessageController extends AbstractController
 
             return $this->redirectToRoute('message');
         }
-        // $form = $this->createForm(MessageType::class, $message);
 
         return $this->render('pages/message/edit.html.twig', [
             'form' => $form->createView()
         ]);
     }
+    #[Route('/message/delete/{id}', 'message.delete', methods:['GET'])]
+    public function delete(EntityManagerInterface $manager, Message $message) : Response 
+    {
+        if(!$message){
+            return $this->redirectToRoute('message');
+        }
+        $manager->remove($message);
+        $manager->flush();
+
+        return $this->redirectToRoute('message');
+    }
+
 }
