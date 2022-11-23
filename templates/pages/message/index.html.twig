@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+{% block title %}
+Quack - Messages
+{% endblock %}
+{% block body %}
+     <div class="container">
+     {% for message in messages  %}
+        <div>
+            <p>{{message.message}}</p>
+        <div>
+     {% endfor %}
+    </div>
+
+{% endblock %}
