@@ -12,12 +12,12 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/pulse/bootstrap.min.css" integrity="sha384-L7+YG8QLqGvxQGffJ6utDKFwmGwtLcCjtwvonVZR/Ba2VzhpMwBz51GaXnUsuYbj" crossorigin="anonymous">
-            <link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/pulse/bootstrap.min.css", integrity="sha384-L7+YG8QLqGvxQGffJ6utDKFwmGwtLcCjtwvonVZR/Ba2VzhpMwBz51GaXnUsuYbj", crossorigin="anonymous">
+            <link rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/pulse/bootstrap.min.css", integrity="sha384-L7+YG8QLqGvxQGffJ6utDKFwmGwtLcCjtwvonVZR/Ba2VzhpMwBz51GaXnUsuYbj", crossorigin="anonymous">
         {% endblock %}
     </head>
     <body>
     {% block header %}
-    {% include "template" %}
+    {% include "partials/_header.html.twig" %}
     {% endblock %}
         {% block body %}{% endblock %}
     </body>
