@@ -5,19 +5,16 @@ Quack - Messages
 {% block body %}
      <div class="container mt-4">
      <h1> Messages </h1>
+     <a href="{{path('message.new')}}" class="btn btn-primary ">Créer un Quack</a>
   {% for message in messages  %}
       {# <td>{{message.message}}</td> #}
-    <div class="card text-white bg-primary mb-3" style="max-width: 20rem; ">
+    <div class="card text-white bg-primary mt-4 mb-2" style="max-width: 20rem; ">
   <div class="card-header">Message</div>
   <div class="card-body">
     <h4 class="card-title">{{message.message}}</h4>
     <p class="card-text"></p>
-  </div>
-   
+  </div>   
      {% endfor %}
-  </tbody>
-
-     
+  </tbody> 
     </div>
-
 {% endblock %}

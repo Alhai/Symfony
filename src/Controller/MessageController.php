@@ -39,11 +39,22 @@ class MessageController extends AbstractController
             $message = $form->getData();
             $manager->persist($message);
             $manager->flush();
+
+            return $this->redirectToRoute('message');
         }
 
         return $this->render('pages/message/new.html.twig', [
             'form' => $form->createView()
 
+        ]);
+    }
+    #[Route('/message/edition/{id}', 'message.edit', methods:['GET', 'POST'])]
+    public function edit(MessageRepository $repository, int $id) : Response
+    {
+        $message = $repository->findOneBy(["id" => $id]);
+        $form = $this->createForm(MessageType::class, $message);
+        return $this->render('pages/message/edit.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }
